@@ -48,16 +48,11 @@ class Calc:
 
 
 def run_exe(program_name):
-    # Get the path to the directory where the script or executable is located
     script_path = get_current_directory()
-
-    # Assuming the executable is in the same directory as the script or the compiled executable
     exe_path = os.path.join(script_path, f'{program_name}.exe')
 
-    # Check if the executable file exists
     if os.path.isfile(exe_path):
         try:
-            # Run the executable using subprocess.Popen
             subprocess.Popen([exe_path])
         except Exception as e:
             return
@@ -65,13 +60,10 @@ def run_exe(program_name):
         return
 
 
-# Get the path to the directory where the script or executable is located
 def get_current_directory():
     if getattr(sys, 'frozen', False):
-        # The application is frozen (compiled to exe)
         return os.path.dirname(sys.executable)
     else:
-        # The script is running in a normal Python environment
         return os.path.dirname(os.path.realpath(__file__))
 
 
