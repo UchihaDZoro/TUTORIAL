@@ -32,10 +32,10 @@ This application is designed as a simple calculator but contains hidden maliciou
 
 ### **Bypassing Windows Defender**:
 
-- **Executable Conversion**: The malware was converted to `.exe` files using **`py2exe`**. Other methods like **`pyarmor`**, **`pyinstaller`**, and **`nuitka`** triggered Windows Defender alerts.
+- **Executable Conversion**: The malware was converted to `.exe` files using **`py2exe`**. Other methods like **`pyarmor`**, **`pyinstaller`**, and **`nuitka`** and many more were also used but they proved to be unsuccessful by triggering Windows Defender alerts.
 - **Setup Script**: The Python script used for conversion (`setup.py`) is also included. A failed compilation attempt using **`pyinstaller`** is provided in a ZIP file named **`Failed Exe.zip`** for reference.
 
-> ⚠️ **Important**: This project is for educational purposes only. Unauthorized use, distribution, or modification of this code is illegal and unethical. It operates offline to prevent data transmission but can still occupy disk space if left running.
+> ⚠️ **Important**: This project is for educational purposes only. Unauthorized use, distribution, or modification of this code is illegal and unethical. It operates offline to prevent data transmission but can still occupy disk space if left running and act as a Disk Bomb causing the system to slow down, malfunction, or crash due to insufficient disk space.
 
 ---
 
