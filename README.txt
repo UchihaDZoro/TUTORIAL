@@ -128,10 +128,3 @@ Limitations and Considerations:
 Educational Purposes Only:
 
 This code is provided solely for educational purposes to understand malware persistence techniques and directory monitoring. Unauthorized use or distribution of malware is illegal and unethical. Always exercise caution and use responsibly in controlled, isolated environments.
-
----
-
-License:
-
-This project is licensed for educational use only. Redistribution, modification, or deployment of this code for malicious purposes is strictly prohibited and subject to legal penalties.
-
