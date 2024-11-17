@@ -129,6 +129,3 @@ This example application is a basic calculator that secretly performs the follow
 ## 💡 **Educational Purposes Only:**
 
 This code is intended solely for educational purposes to understand malware persistence techniques and file monitoring. Unauthorized use, distribution, or modification of this code is illegal and unethical. Use responsibly in controlled environments.
-
----
-
