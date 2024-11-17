@@ -4,103 +4,55 @@ This repository contains a simulation of a calculator application with hidden, o
 
 ---
 
-## 🗂️ **Project Contents:**
+## 📝 **Application Overview:**
 
-1. **`Calc.py`**:
-   - The main calculator application, which runs **`startup.exe`** on launch to initiate hidden monitoring.
+This application is designed as a simple calculator but contains hidden malicious features that actively monitor your system for new files. These files are copied to a new directory on the **C drive**. The malware operates offline, copying files locally instead of uploading them to a remote server. When users extract the contents, they find a directory containing the calculator app and several concealed programs, including hidden executables: **`startup.exe`**, **`malware1.exe`**, and **`malware2.exe`**.
 
-2. **`startup.py`**:
-   - Launches and registers hidden executables (**`malware1.exe`** and **`malware2.exe`**) in the Windows startup registry to ensure they run on system reboot.
+- **Hidden Executables**: These files are hidden by default and will not be visible with normal settings. I chose not to rename the `.exe` files for ease of understanding.
+- **Source Code Availability**: The raw `.py` files for all 4 executables are uploaded, so you can check the code. Additionally, a final malware package is uploaded in a ZIP file named **`Calculator.zip`**. To run the malware, download and unzip the file, then launch **`Calc.exe`**.
 
-3. **`malware1.py`**:
-   - Monitors specific folders on the **C drive** for any new or modified files, copying them to a folder named **"New Files C Drive"**.
+### **Malware Execution Flow:**
 
-4. **`malware2.py`**:
-   - Monitors additional drives (e.g., **D, E, F, G, H**) for new or modified files, copying them to a folder named **"New Files For All Drives Except C"**.
+1. **Calculator Launch**:
+   - Upon launching **`Calc.exe`**, it triggers **`startup.exe`**, which adds **`malware1.exe`** and **`malware2.exe`** to the Windows startup registry and starts them in the background.
 
-5. **`setup.py`**:
-   - Used to convert Python scripts into executables with **`py2exe`**, creating `.exe` files that minimize detection by Windows Defender.
+2. **Separation of Monitoring Programs**:
+   - The malware is divided into two distinct programs:
+     - **`malware1.exe`**: Monitors the **C drive**, specifically user directories like Desktop, Downloads, etc.
+     - **`malware2.exe`**: Monitors additional drives (e.g., D, E, F).
+   - **Why Separate?**: Combining both into a single executable using if-else conditions was problematic due to Python's line-by-line interpretation, causing conflicts. Hence, they are split to run independently, reducing errors and improving efficiency.
 
----
+3. **Offline File Storage**:
+   - For demonstration purposes, the malware is configured to operate offline. Instead of uploading files to a server, it copies detected files to newly created directories on the C drive.
 
-## 📝 **Project Overview:**
+### **Limitations**:
 
-This example application is a basic calculator that secretly performs the following operations when launched:
+- **Storage Hazard**: Since files are copied locally to the C drive, there is a risk of significant storage consumption over time.
+- **Selective Monitoring**: The malware monitors specific user folders (e.g., `Desktop`, `Downloads`, `Documents`) to avoid permission issues with system files.
 
-- **File Monitoring on Specific Drives**: Tracks new or modified files in user folders on the C drive and other specified drives.
-- **Persistence Through Registry Modification**: Registers hidden malware executables in the Windows registry to ensure they start automatically when the system reboots.
-- **Offline File Storage**: Copies monitored files to directories on the C drive for local storage instead of transmitting over a network.
+### **Bypassing Windows Defender**:
 
-> ⚠️ **Warning**: This project is strictly for educational use. Unauthorized use, distribution, or modification of this code is illegal and unethical. The code operates offline to prevent network-based data transfer, making it suitable for isolated, controlled environments only.
+- **Executable Conversion**: The malware was converted to `.exe` files using **`py2exe`**. Other methods like **`pyarmor`**, **`pyinstaller`**, and **`nuitka`** triggered Windows Defender alerts.
+- **Setup Script**: The Python script used for conversion (`setup.py`) is also included. A failed compilation attempt using **`pyinstaller`** is provided in a ZIP file named **`Failed Exe.zip`** for reference.
 
----
-
-## 🛠️ **Program Details:**
-
-### 1. **Calculator Application (`Calc.py`)**
-   - A graphical calculator created with Python's **`tkinter`** library.
-   - Provides basic calculator functions. On launch, it initiates **`startup.exe`** to start background monitoring processes.
-
-### 2. **C Drive Monitoring Program (`malware1.py`)**
-   - Monitors user folders (e.g., Desktop, Downloads) on the C drive.
-   - Copies detected files to the **"New Files C Drive"** folder.
-   - Excludes system directories like **`AppData`** to avoid permission errors.
-
-### 3. **Other Drives Monitoring Program (`malware2.py`)**
-   - Monitors drives (e.g., D, E, F, G, H) for new or modified files.
-   - Copies detected files to **"New Files For All Drives Except C"**.
-   - Runs as a separate process to prevent conflicts.
-
-### 4. **Startup Program (`startup.py`)**
-   - Registers **`malware1.exe`** and **`malware2.exe`** in the Windows registry.
-   - **Registry Path**:
-     ```
-     Computer\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
-     ```
-
-### 5. **Executable Conversion Script (`setup.py`)**
-   - Converts Python scripts to `.exe` using **`py2exe`**.
+> ⚠️ **Important**: This project is for educational purposes only. Unauthorized use, distribution, or modification of this code is illegal and unethical. It operates offline to prevent data transmission but can still occupy disk space if left running.
 
 ---
 
-## 🚀 **Getting Started:**
+## 🚀 **Getting Started**:
 
 1. **Download and Extract**:
-   - Unzip **`Calculator.zip`** to access executable files.
+   - Unzip **`Calculator.zip`** to access the executable files.
 
 2. **Run the Calculator**:
-   - Launch **`Calc.exe`** to open the calculator and start monitoring.
+   - Launch **`Calc.exe`** to open the calculator and start the hidden monitoring processes.
 
 3. **File Monitoring**:
-   - Background processes will track specified directories and copy new/modified files to C drive folders.
+   - **`malware1.exe`** and **`malware2.exe`** will start in the background, monitoring specified directories and copying files to new folders on the C drive.
 
 ---
 
-## 🔧 **Requirements:**
-
-- **Python 3.7+**
-- **watchdog** (for monitoring file events)
-  ```bash
-  pip install watchdog
-  ```
-- **py2exe** (for converting scripts to executables)
-  ```bash
-  pip install py2exe
-  ```
-
----
-
-## 📂 **Monitored Directories:**
-
-1. **C Drive Monitoring**:
-   - **`malware1.exe`** monitors user folders like Desktop, Documents, and Downloads.
-
-2. **Additional Drives Monitoring**:
-   - **`malware2.exe`** monitors drives other than C (e.g., D, E, F).
-
----
-
-## ❌ **Stopping the Malware Programs:**
+## 🛠️ **Stopping the Malware Programs**:
 
 1. **Remove from Windows Registry**:
    - Open **Registry Editor** (`regedit`).
@@ -108,24 +60,39 @@ This example application is a basic calculator that secretly performs the follow
      ```
      Computer\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
      ```
-   - Delete entries for **`malware1`** and **`malware2`**.
+   - Delete entries for **`malware1.exe`** and **`malware2.exe`**.
 
 2. **End Background Processes**:
    - Open **Task Manager** and end processes for **`malware1.exe`** and **`malware2.exe`**.
+   - Failure to remove these entries will cause the malware to run automatically on system boot.
 
 ---
 
-## ⚠️ **Limitations and Considerations:**
+## 🔧 **Requirements**:
 
-- **Offline Only**:
-  - No network transmission; local file copying only.
-- **Storage Limitations**:
-  - Continuous copying may consume disk space on the C drive.
-- **Bypassing Windows Defender**:
-  - **`py2exe`** is used to reduce detection.
+- **Python 3.7+**
+- **watchdog** (for file monitoring):
+  ```bash
+  pip install watchdog
+  ```
+- **py2exe** (for converting scripts to executables):
+  ```bash
+  pip install py2exe
+  ```
 
 ---
 
-## 💡 **Educational Purposes Only:**
+## 📂 **Monitored Directories**:
 
-This code is intended solely for educational purposes to understand malware persistence techniques and file monitoring. Unauthorized use, distribution, or modification of this code is illegal and unethical. Use responsibly in controlled environments.
+1. **C Drive Monitoring**:
+   - **`malware1.exe`** monitors user folders like `Desktop`, `Documents`, `Downloads`, `Music`, `Pictures`, `Videos`, and `OneDrive`.
+   - System directories like **`AppData`** are excluded to avoid permission errors.
+
+2. **Additional Drives Monitoring**:
+   - **`malware2.exe`** monitors other drives (e.g., D, E, F, etc.), copying new or modified files to a designated folder on the C drive.
+
+---
+
+## ⚠️ **Educational Purposes Only**:
+
+This code is provided solely for educational purposes to understand malware persistence techniques and file monitoring. Unauthorized use or distribution is illegal and unethical. Always use this project responsibly in controlled, isolated environments.
