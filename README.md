@@ -1,6 +1,6 @@
-# 📂 **Offline Malware Simulation - "Calculator with Monitoring and Persistence"**
+# 📂 **Trojnanize Calc - "File monitoring malware"**
 
-This repository contains a simulation of a calculator application with hidden, offline file-monitoring malware capabilities. This is designed purely for educational purposes to demonstrate basic malware functions like persistence, file monitoring, and registry modification. The project is isolated and runs only on the local machine, without any network or remote components.
+This repository contains a trojanized calculator application with hidden, offline file-monitoring malware capabilities. This is designed purely for educational purposes to demonstrate basic malware functions like persistence, file monitoring, and registry modification. The project is isolated and runs only on the local machine, without any network or remote components.
 
 ---
 
